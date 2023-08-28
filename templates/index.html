@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>DrunkTyper</title>
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+</head>
+<body>
+    <h2>DrunkTyper by koleq (c) 2023</h2>
+    <p id="text1">{{ text }}</p>
+    <textarea rows="5" cols="50" id="user-input"></textarea>
+    <p id="took1">finish a test to get a time</p>
+    <p>Made using Python 3.11.5 - Flask 2.3.3, HTML 5, JavaScript - jQuery 3.7.0, CSS 3</p>
+    <h4>Debug:</h4>
+    <p id="number">0</p>
+    <p id="status">True</p>
+    
+
+    <script>
+        var input = $("#user-input");
+
+        input.keyup(function() {
+            var status = $("#status");
+            var number = $("#number");
+            var text1 = $("#text1")
+            var took1 = $("#took1")
+
+            var value = input.val();
+            
+            $.ajax({
+                url: "/get_input",
+                type: "POST",
+                data: value,
+                contentType: "text/plain",
+                success: function(response) {
+                    console.log(response);
+                    status.text(response.status)
+                    number.text(response.number)
+                    text1.html(response.text)
+                    took1.text(response.took)
+                },
+                error: function(error) {
+                    console.error(error);
+                }
+            });
+        });
+    </script>
+
+    <style>
+        p {
+            font-family: consolas;
+            font-size: 16;
+        }
+
+        textarea {
+            font-family: consolas;
+            font-size: 16;
+        }
+
+        #correct {
+            color: lime;
+        }
+    </style>
+</body>
+</html>
