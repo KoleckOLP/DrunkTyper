@@ -10,32 +10,37 @@
     <p id="text1">{{ text }}</p>
     <textarea rows="5" cols="50" id="user-input"></textarea>
     <p id="took1">finish a test to get a time</p>
+    <p>rWPM = Real WPM (words / time) / 60<br>aWPM = Average American Word WPM ((characters / 5) / time) * 60</p>
     <p>Made using Python 3.11.5 - Flask 2.3.3, HTML 5, JavaScript - jQuery 3.7.0, CSS 3</p>
     <h4>Debug:</h4>
-    <p id="number">0</p>
-    <p id="status">True</p>
+    <p id="debug"></p>
     
-
     <script>
         var input = $("#user-input");
 
+        $(document).ready(function(){
+            $.fn.index_communicate();
+        })
+
         input.keyup(function() {
-            var status = $("#status");
-            var number = $("#number");
+            $.fn.index_communicate();
+        })
+
+        $.fn.index_communicate = function(){
+            var debug = $("#debug")
             var text1 = $("#text1")
             var took1 = $("#took1")
 
             var value = input.val();
             
             $.ajax({
-                url: "/get_input",
+                url: "/index_input",
                 type: "POST",
                 data: value,
                 contentType: "text/plain",
                 success: function(response) {
                     console.log(response);
-                    status.text(response.status)
-                    number.text(response.number)
+                    debug.text(`${response.number} ${response.status} ${response.stopat}`)
                     text1.html(response.text)
                     took1.text(response.took)
                 },
@@ -43,7 +48,7 @@
                     console.error(error);
                 }
             });
-        });
+        };
     </script>
 
     <style>
@@ -59,6 +64,10 @@
 
         #correct {
             color: lime;
+        }
+
+        #wrong {
+            color: red;
         }
     </style>
 </body>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DrunkTyper | Settings</title>
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+</head>
+<body>
+    <h2>DrunkTyper by koleq (c) 2023</h2>
+    <form name="stopatsetting">
+        <input type="radio" id="nothing" name="stopat" value="nothing">
+        <label for="nothing">nothing</label><br>
+        <input type="radio" id="letter" name="stopat" value="letter">
+        <label for="letter">letter</label><br>
+        <input type="radio" id="word" name="stopat" value="word">
+        <label for="word">word</label>
+    </body>
+
+    <script>
+        $('input[type=radio][name=stopat]').change(function() {
+
+            $.ajax({
+                url: "/settings_input",
+                type: "POST",
+                data: $('input[name="stopat"]:checked').val(),
+                contentType: "text/plain",
+                success: function(response) {
+                    console.log(response);
+                },
+                error: function(error) {
+                    console.error(error);
+                }
+            })
+        })
+
+        
+    </script>
+
+    <style>
+        input {
+            display: inline;
+        }
+    </style>
+</body>
+</html>
