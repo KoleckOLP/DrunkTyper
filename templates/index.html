@@ -7,9 +7,11 @@
 </head>
 <body>
     <h2>DrunkTyper by koleq (c) 2023</h2>
+    <p><a href="/settings">settings</a></p>
     <p id="text1">{{ text }}</p>
-    <textarea rows="5" cols="50" id="user-input"></textarea>
+    <textarea rows="1" id="user-input"></textarea>
     <p id="took1">finish a test to get a time</p>
+    <p><a href=".">restart</a></p>
     <p>rWPM = Real WPM (words / time) / 60<br>aWPM = Average American Word WPM ((characters / 5) / time) * 60</p>
     <p>Made using Python 3.11.5 - Flask 2.3.3, HTML 5, JavaScript - jQuery 3.7.0, CSS 3</p>
     <h4>Debug:</h4>
@@ -17,6 +19,7 @@
     
     <script>
         var input = $("#user-input");
+        var last_correct = ""
 
         $(document).ready(function(){
             $.fn.index_communicate();
@@ -39,10 +42,19 @@
                 data: value,
                 contentType: "text/plain",
                 success: function(response) {
-                    console.log(response);
-                    debug.text(`${response.number} ${response.status} ${response.stopat}`)
+                    //console.log(response);
+                    input.attr('rows', response.rows)
+                    debug.text(`${response.number} ${response.status} ${response.stopat} ${response.rows}`)
                     text1.html(response.text)
                     took1.text(response.took)
+                    if (response.stopat == "letter"){
+                        if (response.status == "True"){
+                            last_correct = value
+                        } else {
+                            input.val(last_correct)
+                        }
+                    }
+                    
                 },
                 error: function(error) {
                     console.error(error);
@@ -53,13 +65,19 @@
 
     <style>
         p {
-            font-family: consolas;
-            font-size: 16;
+            font: 16px "consolas";
         }
 
         textarea {
-            font-family: consolas;
-            font-size: 16;
+            font: 16px "consolas";
+
+            resize: none;
+
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+
+            width: 100%;
         }
 
         #correct {

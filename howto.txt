@@ -1,0 +1,18 @@
+ssh into the asustor
+add waitress into the path: export PATH=$PATH:/usr/local/AppCentral/python3/bin
+navigate to DrunkTyper: cd /volume1/Web/DrunkTyper
+run waitress: nohup waitress-serve --host 0.0.0.0 --port 5000 main:app
+
+press enter to get a console
+
+jobs shows backgorund jobs
+
+fg foregorunds a background job
+
+Ctrl+Z stopps a job
+
+bg backgrounds a stopped job
+
+ps | grep waitress - find the waitress process 
+
+you can than kill it with kill *PID* where *PID* is the pid of the process
