@@ -8,10 +8,12 @@
 <body>
     <h2>DrunkTyper by koleq (c) 2023</h2>
     <p><a href="/settings">settings</a></p>
-    <p id="text1">{{ text }}</p>
-    <textarea rows="1" id="user-input"></textarea>
-    <p id="took1">finish a test to get a time</p>
-    <p><a href=".">restart</a></p>
+    <div id="main">
+        <p id="text1">{{ text }}</p>
+        <textarea id="user-input"></textarea>
+        <p id="took1">finish a test to get a time</p>
+        <p><a href=".">restart</a></p>
+    </div>
     <p>rWPM = Real WPM (words / time) / 60<br>aWPM = Average American Word WPM ((characters / 5) / time) * 60</p>
     <p>Made using Python 3.11.5 - Flask 2.3.3, HTML 5, JavaScript - jQuery 3.7.0, CSS 3</p>
     <h4>Debug:</h4>
@@ -63,6 +65,23 @@
     <style>
         p {
             font: 16px "consolas";
+        }
+
+        h2, h4, p {
+            text-align: center;
+        }
+
+        #main {
+            margin-top: auto;
+            margin-bottom: 50%;
+        }
+
+        #text1 {
+            text-align: left;
+            margin-left: auto;
+            margin-right: auto;
+            max-width: 75ch;
+            word-break: break-word;
         }
 
         textarea {
