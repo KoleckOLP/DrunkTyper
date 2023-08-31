@@ -48,10 +48,8 @@
                     text1.html(response.text)
                     took1.text(response.took)
                     if (response.stopat == "letter"){
-                        if (response.status == "True"){
-                            last_correct = value
-                        } else {
-                            input.val(last_correct)
+                        if (response.status == "False"){
+                            input.val(value.slice(0,-1))
                         }
                     }
                     
