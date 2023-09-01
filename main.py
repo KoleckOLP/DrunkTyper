@@ -3,7 +3,10 @@ from markupsafe import Markup
 from time import time
 import random
 
-app = Flask(__name__)
+app = Flask(__name__, 
+            static_url_path='',
+            static_folder='static/',
+            template_folder='templates/')
 
 status = "True"
 #text = "Cigarettes and tiny liquor bottles,\nJust what you'd expect inside her new Balenciaga.\nWild romance turned dreams into an empire.\nSelf-made success now she rolls with Rockefellers."
@@ -12,6 +15,7 @@ status = "True"
 #text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque mollis volutpat condimentum. In posuere metus mi, volutpat sagittis quam interdum quis. Donec vulputate ornare nunc, et fringilla velit eleifend malesuada. Duis non lorem mattis, elementum dolor quis, tristique risus. Mauris tempor lacus massa, a dapibus lorem eleifend sit amet. Donec lacinia venenatis libero, vel dictum elit euismod nec. Aliquam tristique."
 
 text = ""
+wcount = 50
 
 with open('english200.txt', 'r') as file:
     words = file.read().splitlines()
@@ -26,9 +30,9 @@ for i in range(49):
 def index():
     global text
     text = ""
-    for i in range(49):
+    for i in range(wcount-1):
         text = text + random.choice(words) + " "
-    if i == 48:
+    if i == wcount-2:
         text = text + random.choice(words)
     logic()
     return render_template("index.html", text=Markup(text.replace("\n", "<br>")), status=status)
@@ -42,7 +46,8 @@ def settings():
 #endregion
 
 index_data = ""
-settings_data = "nothing"
+stopat = "nothing"
+
 
 started = False
 ended = False
@@ -56,17 +61,20 @@ last_correct_length = 0
 def index_input():
     global index_data
     index_data = request.data.decode("utf-8")
-    length, rettext, tooktime, settings_data, rows = logic()
-    return jsonify(status=status, number=length, text=Markup(rettext.replace("\n", "<br>")), took=tooktime, stopat=settings_data, rows=rows)
+    #length, rettext, tooktime, settings_data, rows = logic()
+    #return jsonify(status=status, number=length, text=Markup(rettext.replace("\n", "<br>")), took=tooktime, stopat=settings_data, rows=rows)
+    return 0 # placeholder
 #endregion
 
 #region settings_input
 @app.route("/settings_input", methods=["POST"])
 def settings_input():
-    global settings_data
-    settings_data = request.data.decode("utf-8")
-    logic()
-    return settings_data
+    global stopat
+    global wcount
+    stopat = request.json['stopat']
+    wcount = int(request.json['wcount'])
+    #logic()
+    return "small dick" # no idead what to return
 #endregion
 
 #region logic
@@ -126,7 +134,7 @@ def logic():
         rettext = f"<span id=\"correct\">{text[:last_correct_length]}</span><span id=\"wrong\">{wrong_text}</span>{text[length:]}"
     #endregion
 
-    return length, rettext, tooktime, settings_data, rows
+    return 0 #length, rettext, tooktime, settings_data, rows
 #endregion
 
 if __name__ == '__main__':

@@ -1,0 +1,41 @@
+p {
+    font: 16px "consolas";
+}
+
+h2, h4, p {
+    text-align: center;
+}
+
+#main {
+    margin-top: auto;
+    margin-bottom: 10%;
+}
+
+#text1 {
+    text-align: left;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 75ch;
+    word-break: normal;
+}
+
+textarea {
+    font: 16px "consolas";
+
+    resize: none;
+
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+
+    width: 100%;
+}
+
+#correct {
+    color: lime;
+}
+
+#wrong {
+    color: red;
+    word-break: break-word; /*because of adding the dots I can't not break words*/
+}
