@@ -12,7 +12,7 @@ var time1
 var time2
 
 var tooktime
-var oldvalue = 0
+var oldvalue = ""
 
 var cheating
 
@@ -47,7 +47,7 @@ $(document).ready(function(){
             ended = true
             started = false
             time2 = $.now()
-            console.log(time2 - time1) // this thing finally prove that the timer works
+            //console.log(time2 - time1) // this thing finally prove that the timer works
         }
 
         // colors
@@ -56,7 +56,6 @@ $(document).ready(function(){
                 cheating = true
                 started = false
                 ended = true
-                took1.text("your are cheating")
             }
             status = true
             text1.html(`<span id=\"correct\">${text.slice(0, length)}</span>${text.slice(length)}`)
@@ -81,7 +80,6 @@ $(document).ready(function(){
                     var elapsedTime = Date.now() - startTime;
                     tooktime = (elapsedTime / 1000).toFixed(2)
                     took1.text(tooktime+"s ")
-                    console.log(tooktime)
                 }
             }, 10);
         }
@@ -92,6 +90,9 @@ $(document).ready(function(){
                 wpm = ((text.split(" ")).length / tooktime) * 60
                 wpm5 = ((max / 5) / tooktime ) * 60
                 took1.text(took1.text()+`${wpm.toFixed(2)} rWPM ${wpm5.toFixed(2)} aWPM`)
+            }
+            else if (cheating) {
+                took1.text("You are cheating")
             }
         }
 
