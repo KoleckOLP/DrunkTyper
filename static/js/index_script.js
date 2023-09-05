@@ -91,6 +91,7 @@ $(document).ready(function(){
                 wpm = ((text.split(" ")).length / tooktime) * 60
                 wpm5 = ((max / 5) / tooktime ) * 60
                 took1.text(took1.text()+`${wpm.toFixed(2)} rWPM ${wpm5.toFixed(2)} aWPM`)
+                input.prop('readonly', true)
             }
             else if (cheating) {
                 took1.text("You are cheating")
