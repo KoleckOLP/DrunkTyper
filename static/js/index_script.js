@@ -7,6 +7,7 @@ var started = false
 var max = 0
 var ended = false
 var running
+var finished = false
 
 var time1
 var time2
@@ -35,7 +36,7 @@ $(document).ready(function(){
         max = text.length
 
         // started
-        if (length > 0 && !started) {
+        if (length > 0 && started == false && finished == false) {
             started = true
             finished = false
             ended = false
@@ -85,7 +86,7 @@ $(document).ready(function(){
         }
         else {
             running = false
-            if (ended && !finished && !cheating) {
+            if (ended && finished == false && !cheating) {
                 finished = true
                 wpm = ((text.split(" ")).length / tooktime) * 60
                 wpm5 = ((max / 5) / tooktime ) * 60
