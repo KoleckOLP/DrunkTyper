@@ -11,7 +11,7 @@ app = Flask(__name__,
 status = "True"
 #text = "Cigarettes and tiny liquor bottles,\nJust what you'd expect inside her new Balenciaga.\nWild romance turned dreams into an empire.\nSelf-made success now she rolls with Rockefellers."
 #text = "I am sitting\nIn the morning\nAt the diner\nOn the corner"
-#ext = "I am sitting in the morning at the diner on the corner"
+#text = "I am sitting in the morning at the diner on the corner"
 #text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque mollis volutpat condimentum. In posuere metus mi, volutpat sagittis quam interdum quis. Donec vulputate ornare nunc, et fringilla velit eleifend malesuada. Duis non lorem mattis, elementum dolor quis, tristique risus. Mauris tempor lacus massa, a dapibus lorem eleifend sit amet. Donec lacinia venenatis libero, vel dictum elit euismod nec. Aliquam tristique."
 
 text = ""
