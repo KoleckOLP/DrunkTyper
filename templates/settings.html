@@ -4,54 +4,28 @@
     <meta charset="UTF-8">
     <title>DrunkTyper | Settings</title>
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script type="text/javascript" src="/js/settings_script.js"></script>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <h2>DrunkTyper by koleq (c) 2023</h2>
-    <p><a href="/">home</a></p>
-    <form action="/settings_input" method="POST" id="settings" name="settings">
-        <input type="radio" id="nothing" name="stopat" value="nothing">
-        <label for="nothing">nothing</label><br>
-        <input type="radio" id="letter" name="stopat" value="letter">
-        <label for="letter">letter</label><br>
-        <input type="radio" id="word" name="stopat" value="word">
-        <label for="word">word</label><br>
-        <label for="fname">word count</label>
-        <input type="number" id="wcount" name="wcount" value="25" min="1" max="99999"><br>
-        <input type="submit" value="save">
-    </form>
-    </body>
-
-    <script>
-        $('#settings').submit(function() {
-
-            //console.log("submit", $('input[name="stopat"]:checked').val(), $('input[name="wcount"]').val())
-
-            const data = 
-
-            console.log()
-
-            $.ajax({
-                url: "/settings_input",
-                type: "POST",
-                data: JSON.stringify({ stopat: $('input[name="stopat"]:checked').val(), wcount: $('input[name="wcount"]').val() }),
-                contentType: "application/json",
-                success: function(response) {
-                    console.log(response);
-                },
-                error: function(error) {
-                    console.error(error);
-                }
-            })
-            event.preventDefault();
-        })
-
-        
-    </script>
-
+    <div id="body2">
+        <h2>DrunkTyper by koleq (c) 2023</h2>
+        <p><a href="/">home</a></p>
+        <form id="settings" name="settings">
+            <input type="radio" id="nothing" name="stopat" value="nothing">
+            <label for="nothing">nothing</label><br>
+            <input type="radio" id="letter" name="stopat" value="letter">
+            <label for="letter">letter</label><br>
+            <input type="radio" id="word" name="stopat" value="word">
+            <label for="word">word</label><br>
+            <label for="fname">word count</label>
+            <input type="number" id="wcount" name="wcount" value="25" min="1" max="99999"><br>
+            <input type="submit" value="save">
+        </form>
+    </div>
     <style>
-        input {
-            display: inline;
-        }
+
     </style>
+    </body>
 </body>
 </html>

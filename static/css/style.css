@@ -1,3 +1,5 @@
+/* index and shared */
+
 #body2 {
     width: 960px;
     height: 544px;
@@ -50,6 +52,18 @@ textarea {
 #wrong {
     color: red;
     word-break: break-word; /*because of adding the dots I can't not break words*/
+}
+
+/*Settings*/
+
+input {
+    display: inline;
+}
+
+#settings {
+    width: 300px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 @media (prefers-color-scheme: ligh) {

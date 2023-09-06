@@ -77,6 +77,15 @@ def settings_input():
     return "small dick" # no idead what to return
 #endregion
 
+@app.route("/settings_status", methods=["POST"])
+def settings_status():
+    global stopat
+    settings_status = request.data.decode("utf-8")
+    if settings_status == "gib status":
+        return stopat
+    else:
+        return "stuff is very wrong"
+
 #region logic
 def logic():
     global status
