@@ -25,6 +25,7 @@ $(document).ready(function(){
     var debug = $("#debug")
     var took1 = $("#took1")
 
+    input.val("")
     var text = text1.text()
 
     debug.text(`${started} ${ended} ${length} ${max} ${dick}`)
