@@ -101,5 +101,3 @@ $(document).ready(function(){
         debug.text(`${started} ${ended} ${length} ${max} ${dick}`)
     })
 })
-
-

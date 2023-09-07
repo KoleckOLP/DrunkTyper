@@ -21,7 +21,7 @@ $(document).ready(function(){
         }
     })
 
-    $('#settings').submit(function() {
+    $('#settings').submit(function(event) {
         $.ajax({
             url: "/settings_input",
             type: "POST",
