@@ -1,5 +1,3 @@
-/* index and shared */
-
 #body2 {
     width: 960px;
     height: 544px;
@@ -13,7 +11,9 @@ p {
     font: 16px "consolas";
 }
 
-h2, h4, p {
+h2,
+h4,
+p {
     text-align: center;
 }
 

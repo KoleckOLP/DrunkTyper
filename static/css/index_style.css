@@ -32,5 +32,6 @@ textarea {
 
 #wrong {
     color: red;
-    word-break: break-word; /*because of adding the dots I can't not break words*/
+    word-break: break-word;
+    /*because of adding the dots I can't not break words*/
 }
