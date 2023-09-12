@@ -31,7 +31,6 @@ $(document).ready(function () {
             data: JSON.stringify({ stopat: $('input[name="stopat"]:checked').val(), wcount: $('input[name="wcount"]').val() }),
             contentType: "application/json",
             success: function (response) {
-                console.log(response);
                 alert("Settings were saved.")
             },
             error: function (error) {

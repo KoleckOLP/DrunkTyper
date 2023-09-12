@@ -1,6 +1,8 @@
 var last_correct_length = 0
 var started = false
 var cheating = false
+var length
+var max
 
 // making the html elements public after document ready
 var timer1
@@ -18,15 +20,17 @@ $(document).ready(function () { // runs one time once the page loads
 
     input.keypress(function () {
         if (started == false) {
-            start_additive_timer()
-            started = true
+            if (length != max) { // fixed hold key bug
+                start_additive_timer()
+                started = true
+            }
         }
     })
 
     input.keyup(function () { // runs on each keypress in textarea
         var value = input.val();
         var oldvalue
-        var length = value.length
+        length = value.length
 
         if (value != oldvalue) { // prevents stuff being run twice if text didn't change
 
