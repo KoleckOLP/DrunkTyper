@@ -1,38 +1,32 @@
-var value
-var oldvalue
-
-var text = ""
-
-var length = 0
-var max = 0
-
 var last_correct_length = 0
-
-var timer1
-var took1
-
 var started = false
 var cheating = false
+
+// making the html elements public after document ready
+var timer1
+var took1
 
 $(document).ready(function () { // runs one time once the page loads
     var input = $("#user-input")
     var text1 = $("#text1")
     var took1 = $("#took1")
 
-    text = text1.text()
+    var text = text1.text()
     max = text.length
 
     input.val("") // clears the textbox on firefox
 
-    input.keypress(function () { // runs on each keypress in textarea
-        value = input.val();
-        length = value.length
-
-        // start timer
-        if (oldvalue === undefined & value !== undefined) {
+    input.keypress(function () {
+        if (started == false) {
             start_additive_timer()
             started = true
         }
+    })
+
+    input.keyup(function () { // runs on each keypress in textarea
+        var value = input.val();
+        var oldvalue
+        var length = value.length
 
         if (value != oldvalue) { // prevents stuff being run twice if text didn't change
 
@@ -73,18 +67,18 @@ $(document).ready(function () { // runs one time once the page loads
         }
 
         oldvalue = value
-
-        function start_additive_timer() {
-            var startTime = Date.now();
-            timer1 = setInterval(function () {
-                var elapsedTime = Date.now() - startTime;
-                tooktime = (elapsedTime / 1000).toFixed(2)
-                took1.text(tooktime + "s ")
-            }, 10);
-        }
-
-        function stop_additive_timer() {
-            clearInterval(timer1)
-        }
     })
+
+    function start_additive_timer() {
+        var startTime = Date.now();
+        timer1 = setInterval(function () {
+            var elapsedTime = Date.now() - startTime;
+            tooktime = (elapsedTime / 1000).toFixed(2)
+            took1.text(tooktime + "s ")
+        }, 10);
+    }
+
+    function stop_additive_timer() {
+        clearInterval(timer1)
+    }
 })

@@ -16,13 +16,14 @@ with open("english200.txt", "r") as file:
 def textgen(wcount):
     text = ""
     lastword = ""
-    for i in range(wcount - 1):
+    for i in range(wcount):
         word = random.choice(words)
-        while word == lastword:  # makes sure 2 words don't repeat
+        if (word == lastword):  # makes sure 2 words don't repeat
             word = random.choice(words)
-        text = text + word + " "
-        if i == wcount - 2:
+        if i == wcount - 1:
             text = text + word
+        else:
+            text = text + word + " "
         lastword = word
     return text
 
