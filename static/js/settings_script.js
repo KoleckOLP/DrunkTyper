@@ -3,18 +3,21 @@ $(document).ready(function () {
         url: "/settings_status",
         type: "POST",
         data: "gib status",
-        contentType: "plain/text",
+        contentType: "json",
         success: function (response) {
-            console.log(response);
-            if (response == "nothing") {
+            stopat = response.stopat
+            wcount = response.wcount
+            if (stopat == "nothing") {
                 $('input[value=nothing]').prop('checked', true)
             }
-            else if (response == "letter") {
+            else if (stopat == "letter") {
                 $('input[value=letter]').prop('checked', true)
             }
-            else if (response == "word") {
+            else if (stopat == "word") {
                 $('input[value=word]').prop('checked', true)
             }
+
+            $('input[name=wcount]').val(wcount)
         },
         error: function (error) {
             console.error(error);
@@ -29,6 +32,7 @@ $(document).ready(function () {
             contentType: "application/json",
             success: function (response) {
                 console.log(response);
+                alert("Settings were saved.")
             },
             error: function (error) {
                 console.error(error);
