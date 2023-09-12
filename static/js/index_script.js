@@ -3,6 +3,7 @@ var started = false
 var cheating = false
 var length
 var max
+var oldvalue
 
 // making the html elements public after document ready
 var timer1
@@ -29,7 +30,6 @@ $(document).ready(function () { // runs one time once the page loads
 
     input.keyup(function () { // runs on each keypress in textarea
         var value = input.val();
-        var oldvalue
         length = value.length
 
         if (value != oldvalue) { // prevents stuff being run twice if text didn't change
