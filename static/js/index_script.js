@@ -24,7 +24,7 @@ $(document).ready(function () { // runs one time once the page loads
 
     input.val("") // clears the textbox on firefox
 
-    input.keyup(function () { // runs on each keypress in textarea
+    input.keypress(function () { // runs on each keypress in textarea
         value = input.val();
         length = value.length
 
@@ -51,8 +51,8 @@ $(document).ready(function () { // runs one time once the page loads
         }
 
         // anti-cheat
-        if(oldvalue !== undefined) {
-            if (length-oldvalue.length >= max/4) {
+        if (oldvalue !== undefined) {
+            if (length - oldvalue.length >= max / 4) {
                 cheating = true
             }
         }
