@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, jsonify
 from markupsafe import Markup
 import random
 
@@ -6,31 +6,34 @@ app = Flask(
     __name__, static_url_path="", static_folder="static/", template_folder="templates/"
 )
 
-status = "True"
-
 text = ""
 wcount = 50
 
 with open("english200.txt", "r") as file:
     words = file.read().splitlines()
 
-for i in range(49):
-    text = text + random.choice(words) + " "
-    if i == 48:
-        text = text + random.choice(words)
+
+def textgen(wcount):
+    text = ""
+    lastword = ""
+    for i in range(wcount - 1):
+        word = random.choice(words)
+        while word == lastword:  # makes sure 2 words don't repeat
+            word = random.choice(words)
+        text = text + word + " "
+        if i == wcount - 2:
+            text = text + word
+        lastword = word
+    return text
 
 
-@app.route("/")
+@app.route("/", methods=["GET"])
 def index():
     global text
-    text = ""
-    for i in range(wcount - 1):
-        text = text + random.choice(words) + " "
-    if i == wcount - 2:
-        text = text + random.choice(words)
-    return render_template(
-        "index.html", text=Markup(text.replace("\n", "<br>")), status=status
-    )
+    repeat = request.args.get("repeat")
+    if repeat != "yes" or text == "":
+        text = textgen(wcount)
+    return render_template("index.html", text=Markup(text.replace("\n", "<br>")))
 
 
 @app.route("/settings")
@@ -62,7 +65,6 @@ def settings_input():
     global wcount
     stopat = request.json["stopat"]
     wcount = int(request.json["wcount"])
-    # logic()
     return "small dick"  # no idead what to return
 
 
@@ -71,9 +73,8 @@ def settings_status():
     global stopat
     settings_status = request.data.decode("utf-8")
     if settings_status == "gib status":
-        return stopat
-    else:
-        return "stuff is very wrong"
+        data = {"stopat": stopat, "wcount": wcount}
+        return jsonify(data)
 
 
 if __name__ == "__main__":
