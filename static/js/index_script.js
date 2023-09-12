@@ -11,6 +11,9 @@ var last_correct_length = 0
 var timer1
 var took1
 
+var started = false
+var cheating = false
+
 $(document).ready(function () { // runs one time once the page loads
     var input = $("#user-input")
     var text1 = $("#text1")
@@ -28,6 +31,7 @@ $(document).ready(function () { // runs one time once the page loads
         // start timer
         if (oldvalue === undefined & value !== undefined) {
             start_additive_timer()
+            started = true
         }
 
         if (value != oldvalue) { // prevents stuff being run twice if text didn't change
@@ -46,13 +50,26 @@ $(document).ready(function () { // runs one time once the page loads
             }
         }
 
+        // anti-cheat
+        if(oldvalue !== undefined) {
+            if (length-oldvalue.length >= max/4) {
+                cheating = true
+            }
+        }
+
         // stop timer
-        if (length == max && correct) {
+        if ((length == max && correct && started) || cheating) {
             stop_additive_timer()
+            started = false
             input.prop('readonly', true)
-            wpm = ((text.split(" ")).length / tooktime) * 60
-            wpm5 = ((max / 5) / tooktime) * 60
-            took1.text(took1.text() + `${wpm.toFixed(2)} rWPM ${wpm5.toFixed(2)} aWPM`)
+            if (cheating) {
+                took1.text("cheating: Wrote more the 1/8th of the text in one text area refresh.")
+            }
+            else {
+                wpm = ((text.split(" ")).length / tooktime) * 60
+                wpm5 = ((max / 5) / tooktime) * 60
+                took1.text(took1.text() + `${wpm.toFixed(2)} rWPM ${wpm5.toFixed(2)} aWPM`)
+            }
         }
 
         oldvalue = value
